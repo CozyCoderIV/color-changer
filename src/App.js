@@ -1,23 +1,47 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import { useState } from "react";
 
 function App() {
+  // Attributes
+  let colorCircle = document.getElementById("circle");
+  let colorDisplay = document.getElementById("color");
+
+  // Hooks
+  const [color, setColor] = useState("none");
+
+  // Function
+  const handleChange = (e) => {
+    setColor(e.target.value);
+  };
+
+  // JSX
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
+    <div className="App" id="app-bg">
+      {/* Title */}
+      <div id="title_container">
+        <h1>Welcome to Color Changer</h1>
+      </div>
+
+      <div id="content-container">
+        {/* form input */}
+        <form>
+          <label>Enter Color</label>
+          <input type="text" value={color} onChange={handleChange}></input>
+        </form>
+        <button
+          className="toggle"
+          onClick={() => {
+            colorCircle.style.backgroundColor = color;
+            colorDisplay.innerText = color;
+          }}
         >
-          Learn React
-        </a>
-      </header>
+          Change Color
+        </button>
+      </div>
+
+      <div className="colorWheel" id="circle">
+        <h2 id="color">{}</h2>
+      </div>
     </div>
   );
 }
